@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.echelon.ims.presence</groupId>
+	<artifactId>swagger-springboot-project-generator</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>swagger-springboot-project-generator</name>
+	<description>
+		A maven project generator that utilizes the
+		swagger-codegen-maven-plugin and provides a default
+		configuration setup for generating Spring Boot
+		projects from a swagger API specification.
+	</description>
+	
+	<!-- 
+   		TO USE THIS TOOL:
+   			1) Place a swagger.json file in the src/main/resources directory.
+   			2) Run maven with the 'clean package' goals.
+   			3) Grab the generated project from the target/generated-project directory.
+	-->
+
+	<organization>
+		<name>Echelon Information Management Solutions (echelon-ims)</name>
+		<url/>
+	</organization>
+	<developers>
+		<developer>
+			<id>khalidx</id>  <!-- GitHub username -->
+			<name>Khalid Zoabi</name>
+			<email>kzoabi@outlook.com</email>
+			<url>https://www.linkedin.com/in/kzoabi</url>
+			<organization>Echelon Information Management Solutions (echelon-ims)</organization>
+			<organizationUrl/>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>America/New_York</timezone>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<maven.install.skip>true</maven.install.skip>  <!-- Don't install artifact to maven repo, this is just a tool -->
+		<maven.dependency.version.swagger-codegen>2.2.1</maven.dependency.version.swagger-codegen>
+	</properties>
+
+	<build>
+	
+		<plugins>
+			<plugin>
+			    <groupId>io.swagger</groupId>
+			   	<artifactId>swagger-codegen-maven-plugin</artifactId>
+    			<version>${maven.dependency.version.swagger-codegen}</version>
+			    <executions>
+			        <execution>
+			            <goals>
+			                <goal>generate</goal>
+			            </goals>
+			            <configuration>
+			                <inputSpec>src/main/resources/swagger.json</inputSpec>
+			                <language>spring</language>
+			                <output>${project.build.directory}/generated-project</output>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>
+		</plugins>
+			
+		<pluginManagement>
+        	<plugins>
+        		<!--
+        			This plugin's configuration is used to store Eclipse m2e settings only.
+       				It has no influence on the Maven build itself.
+       			-->
+        		<plugin>
+        			<groupId>org.eclipse.m2e</groupId>
+        			<artifactId>lifecycle-mapping</artifactId>
+        			<version>1.0.0</version>
+        			<configuration>
+        				<lifecycleMappingMetadata>
+        					<pluginExecutions>
+        						<pluginExecution>
+        							<pluginExecutionFilter>
+        								<groupId>io.swagger</groupId>
+        								<artifactId>
+        									swagger-codegen-maven-plugin
+        								</artifactId>
+        								<versionRange>
+        									[2.2.1,)
+        								</versionRange>
+        								<goals>
+        									<goal>generate</goal>
+        								</goals>
+        							</pluginExecutionFilter>
+        							<action>
+        								<ignore></ignore>
+        							</action>
+        						</pluginExecution>
+        					</pluginExecutions>
+        				</lifecycleMappingMetadata>
+        			</configuration>
+        		</plugin>
+        	</plugins>
+       	</pluginManagement>
+
+	</build>
+
+</project>
